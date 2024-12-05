@@ -5,16 +5,21 @@ plugins {
 
 android {
     namespace = "com.example.carrotmarketclone"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.carrotmarketclone"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    //데이터 바인딩 코드
+    dataBinding{
+        enable = true
     }
 
     buildTypes {
@@ -36,7 +41,7 @@ android {
 }
 
 dependencies {
-
+    implementation (libs.material.v110)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
