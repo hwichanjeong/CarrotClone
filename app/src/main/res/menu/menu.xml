@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragment_home"
+        android:title="홈"
+        android:icon="@drawable/home"/>
+    <item
+        android:id="@+id/fragment_life"
+        android:title="동네생활"
+        android:icon="@drawable/news"/>
+    <item
+        android:id="@+id/fragment_map"
+        android:title="동네지도"
+        android:icon="@drawable/map"/>
+    <item
+        android:id="@+id/fragment_chat"
+        android:title="채팅"
+        android:icon="@drawable/chat"/>
+    <item
+        android:id="@+id/fragment_my"
+        android:title="나의 쿼카"
+        android:icon="@drawable/my_quka"/>
+</menu>

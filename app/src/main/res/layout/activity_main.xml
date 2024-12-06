@@ -8,14 +8,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity"
-        android:padding="10dp"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            >
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -41,6 +44,7 @@
                     android:layout_toStartOf="@id/notice"
                     android:layout_marginEnd="10dp"
                     android:src="@drawable/search"
+
                     />
             </RelativeLayout>
         </LinearLayout>
@@ -55,10 +59,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/drawable_resize"
-                android:tint="@color/white"
+                android:tint="@color/ivory"
                 android:padding="5dp"
                 android:layout_marginEnd="5dp"
-                android:backgroundTint="@color/black"
+                android:layout_marginStart="15dp"
+                android:backgroundTint="@color/brown"
                 android:background="@drawable/button_style"
                 />
             <android.widget.Button
@@ -67,8 +72,11 @@
                 android:padding="10dp"
                 android:layout_marginEnd="5dp"
                 android:textColor="@color/white"
+                android:fontFamily="@font/exo2black"
+                android:drawableLeft="@drawable/home_resize"
+                android:drawableTint="@color/white"
                 android:background="@drawable/button_style"
-                android:text="button1"
+                android:text="부동산"
                 />
             <android.widget.Button
                 android:layout_width="wrap_content"
@@ -76,8 +84,11 @@
                 android:padding="10dp"
                 android:background="@drawable/button_style"
                 android:textColor="@color/white"
+                android:fontFamily="@font/exo2black"
                 android:layout_marginEnd="5dp"
-                android:text="button1"
+                android:drawableLeft="@drawable/person_resize"
+                android:drawableTint="@color/white"
+                android:text="알바"
                 />
             <android.widget.Button
                 android:layout_width="wrap_content"
@@ -85,8 +96,28 @@
                 android:padding="10dp"
                 android:background="@drawable/button_style"
                 android:textColor="@color/white"
-                android:text="button1"
+                android:fontFamily="@font/exo2black"
+                android:drawableLeft="@drawable/car_resize"
+                android:drawableTint="@color/white"
+                android:text="중고차"
                 />
         </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/main_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation_view"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            app:menu="@menu/menu"
+            app:labelVisibilityMode="labeled"
+            app:itemTextColor="@color/white"
+            android:background="@drawable/radius"
+            app:itemIconTint="@color/white"/>
     </LinearLayout>
 </layout>
