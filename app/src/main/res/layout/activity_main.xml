@@ -113,11 +113,12 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation_view"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             app:menu="@menu/menu"
             app:labelVisibilityMode="labeled"
-            app:itemTextColor="@color/white"
+            android:shadowColor="@android:color/darker_gray"
+            app:itemTextColor="@color/selectedcolor"
             android:background="@drawable/radius"
-            app:itemIconTint="@color/white"/>
+            app:itemIconTint="@color/selectedcolor"/>
     </LinearLayout>
 </layout>
