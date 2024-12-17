@@ -34,14 +34,13 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/idWrapper"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/EditTextGreyStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:layout_below="@id/quka"
-            android:backgroundTint="@color/brown"
             android:hint="아이디">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -54,7 +53,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/pwdWrapper"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/EditTextGreyStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
@@ -76,6 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="자동로그인"
+            android:buttonTint="@color/brown"
             android:layout_below="@id/pwdWrapper"
             android:layout_alignParentRight="true"
             android:layout_marginEnd="40dp"

@@ -1,9 +1,11 @@
 package com.example.carrotmarketclone
 
 import DB.DBHelper
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -11,12 +13,15 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import com.example.carrotmarketclone.databinding.ActivityLoginBinding
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding : ActivityLoginBinding
     var DB: DBHelper?=null
     lateinit var sharedPreferences : SharedPreferences
-
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -30,13 +35,9 @@ class LoginActivity : AppCompatActivity() {
 
         DB = DBHelper(this)
         sharedPreferences = getSharedPreferences("UserInfo", MODE_PRIVATE)
-        val edit = sharedPreferences.edit()
-        // 자동로그인 체크 여부 확인
-        if (binding.autoLogin.isChecked) {
 
-            edit.putBoolean("isChecked", true)
-            edit.apply()
-        }
+        auth = Firebase.auth
+        val edit = sharedPreferences.edit()
 
         val loginBtn = binding.loginBtn
         val editId = binding.editTextId
@@ -46,23 +47,24 @@ class LoginActivity : AppCompatActivity() {
             val user = editId.text.toString()
             val pwd = editPwd.text.toString()
 
-            if (user == "" || pwd == ""){
-                Toast.makeText(this, "아이디와 비번을 모두 입력해주세요", Toast.LENGTH_SHORT).show()
-            } else {
-                val checkUserpass = DB!!.checkUserpass(user,pwd)
-                if (checkUserpass == true){
-                    Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-                    edit.putString("userId", user)
-                    edit.putString("userPwd", pwd)
-
-                    edit.apply()
-
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    Toast.makeText(this, "아이디와 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+            auth.signInWithEmailAndPassword(user, pwd)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithEmail:success")
+                        val user = auth.currentUser
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInWithEmail:failure", task.exception)
+                        Toast.makeText(
+                            baseContext,
+                            "Authentication failed.",
+                            Toast.LENGTH_SHORT,
+                        ).show()
+                    }
                 }
-            }
         }
 
         binding.signUp.setOnClickListener{
@@ -73,22 +75,5 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val user = sharedPreferences.getString("userId", "")
-        val pwd = sharedPreferences.getString("userPwd", "")
-        if (sharedPreferences.getBoolean("isChecked",true)){
-            if (user == "" || pwd == ""){
-                return
-            } else {
-                val checkUserpass = DB!!.checkUserpass(user,pwd)
-                if (checkUserpass == true){
-                    Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    Toast.makeText(this, "아이디와 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
     }
 }

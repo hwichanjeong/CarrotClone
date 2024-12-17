@@ -6,4 +6,17 @@
     </style>
 
     <style name="Theme.CarrotMarketClone" parent="Base.Theme.CarrotMarketClone" />
+
+    <style name="EditTextGreyStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox"> // important : parent 를 이것으로.
+
+        <item name="colorControlNormal">@color/brown</item>  // unFocus 상태일때 밑줄 색.
+        <item name="boxStrokeColor">@color/brown</item> // Focus 상태일때 밑줄 색.
+        <item name="android:textCursorDrawable">@color/brown</item>  // cursor 색.
+
+
+
+
+        <item name="errorTextColor">@color/brown</item>
+
+    </style>
 </resources>
