@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.CheckBox
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -39,37 +41,8 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigationView.selectedItemId = R.id.fragment_home
         }
 
-        initSpinner()
     }
 
-    private fun initSpinner(){
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.category_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.spinner.adapter = adapter
-        }
-
-        binding.spinner.onItemSelectedListener  =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    //if (parent != null)
-                    //Toast.makeText(baseContext, parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show()
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    return
-                }
-
-            }
-    }
 
     fun setBottomNavigationView() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->

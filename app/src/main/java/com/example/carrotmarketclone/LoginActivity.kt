@@ -71,9 +71,41 @@ class LoginActivity : AppCompatActivity() {
             val loginIntent = Intent(this, SignUpActivity::class.java)
             startActivity(loginIntent)
         }
+
+        initCheckBox()
     }
 
-    override fun onResume() {
-        super.onResume()
+    private fun initCheckBox() {
+        binding.autoLogin.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                Toast.makeText(this, "자동 로그인 활성화됨", Toast.LENGTH_SHORT).show()
+                // 자동 로그인 로직을 저장 (예: SharedPreferences에 저장)
+                saveAutoLoginState(true)
+            } else {
+                Toast.makeText(this, "자동 로그인 비활성화됨", Toast.LENGTH_SHORT).show()
+                // 자동 로그인 비활성화
+                saveAutoLoginState(false)
+            }
+        }
+    }
+
+    private fun saveAutoLoginState(isAutoLoginEnabled: Boolean) {
+        val sharedPref = getSharedPreferences("app_prefs", MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putBoolean("auto_login", isAutoLoginEnabled)
+            apply()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val sharedPref = getSharedPreferences("app_prefs", MODE_PRIVATE)
+        val isAutoLoginEnabled = sharedPref.getBoolean("auto_login", false)
+
+        if (isAutoLoginEnabled) {
+            Toast.makeText(this, "자동 로그인 상태입니다.", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
